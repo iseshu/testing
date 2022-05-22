@@ -1,0 +1,5 @@
+selenium-wire
+bs4
+flask
+gunicorn
+flask-cors
