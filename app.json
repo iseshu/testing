@@ -1,0 +1,31 @@
+{
+	"name": "Npay Api",
+  	"description": "An API to get the student information using his id",
+  	"repository": "https://github.com/1337w0rm/YeetMeet",
+  	"keywords": ["selenium", "geckodriver", "python"],
+  	"env": {
+    "CHROMEDRIVER_PATH": {
+    	"description": "Telegram Bot Token",
+        "value": "/app/.chromedriver/bin/chromedriver"
+    	},
+
+    "GOOGLE_CHROME_BIN": {
+      "description": "Google account password",
+      "value":"/app/.apt/usr/bin/google-chrome"
+    	}
+  	},
+
+  	"buildpacks": [
+      {
+          "url": "heroku/python"
+    },
+    {
+        "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+    },
+    {
+        "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+    }
+  ],
+
+  "stack": "heroku-20"
+}
