@@ -1,7 +1,7 @@
 {
 	"name": "Npay Api",
   	"description": "An API to get the student information using his id",
-  	"repository": "https://github.com/1337w0rm/YeetMeet",
+  	"repository": "https://github.com/iseshu/npayapi",
   	"keywords": ["selenium", "geckodriver", "python"],
   	"env": {
     "CHROMEDRIVER_PATH": {
