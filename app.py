@@ -79,3 +79,9 @@ def main_fun():
 
 schedule.every(360).minutes.do(main_fun)
 
+while True:
+ 
+    # Checks whether a scheduled task
+    # is pending to run or not
+    schedule.run_pending()
+    time.sleep(1)
