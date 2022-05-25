@@ -13,7 +13,6 @@ browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),c
 
 newpsw = "hemu.yara"
 
-browser = webdriver.Firefox(executable_path=r"C:\Users\saise\OneDrive\Desktop\driver\geckodriver.exe")
 browser.get("https://www.instagram.com/")
 time.sleep(3)
 browser.find_element_by_name("username").send_keys('_yarra.s.s_')
