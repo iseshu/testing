@@ -1,11 +1,7 @@
-from flask import Flask,request,jsonify
-from flask_cors import CORS
 from seleniumwire import webdriver
-from bs4 import BeautifulSoup
-import os
+import os,time
 
 
-app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {'Access-Control-Allow-Origin': '*'}})
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
@@ -13,49 +9,31 @@ op.add_argument('--headless')
 op.add_argument('--no-sandbox')
 op.add_argument('--disable-dev-sh-usage')
 
+browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=op)
 
+newpsw = "hemu.yara"
 
-def get(pageSource,mobile):
-    try:
-        soup = BeautifulSoup(pageSource,"html.parser")
-        name = soup.find("span",id="firstname").text
-        id = soup.find("span",id="lblStuID").text
-        f_name = soup.find("span",id="lblFatherName").text
-        b_name = soup.find("span",id="lblMotherName").text
-        clas = soup.find("span",id="lblCode").text
-        due = soup.find("span",id="lblBalanceAmount").text
-        #mobile = soup.find("span",id="mobile").text
-        return {"status":True,"due_amount":due,"mobile":mobile,"father_name":f_name,"name":name,"id_no":id,"branch":b_name,"class_n":clas}
-    except:
-        return {"status":False}
+browser = webdriver.Firefox(executable_path=r"C:\Users\saise\OneDrive\Desktop\driver\geckodriver.exe")
+browser.get("https://www.instagram.com/")
+time.sleep(3)
+browser.find_element_by_name("username").send_keys('_yarra.s.s_')
 
-@app.route("/")
-def home():
-    return {"status":True}
+browser.find_element_by_name("password").send_keys('yarra.s')
 
+browser.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button').click()
 
-@app.route("/get")
-def do():
-    a= request.args.get("id")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=op)
-    driver.maximize_window()
-    driver.get("https://payonline.narayanagroup.com/")
-    id_num = driver.find_element_by_id("txtUid")
-    id_num.send_keys(int(a))
-    btn = driver.find_element_by_id("BtnStuGetData")
-    btn.click()
-    pageSource = driver.page_source
-    amount = driver.find_element_by_id("txtCourseFee")
-    amount.send_keys(1280)
-    btn1 = driver.find_element_by_id("btnsubmit")
-    btn1.click()
-    for reqest in driver.requests:
-        if reqest.url == "https://secure.payu.in/_payment":
-            phone = reqest.params['phone']
-    data = get(pageSource,phone)
-    return jsonify(data)
+time.sleep(5)
 
+browser.get('https://www.instagram.com/accounts/password/change/')
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+time.sleep(3)
 
+browser.find_element_by_name('cppOldPassword').send_keys('yarra.s')
+
+browser.find_element_by_name("cppNewPassword").send_keys(newpsw)
+
+browser.find_element_by_name("cppConfirmPassword").send_keys(newpsw)
+
+browser.find_element_by_xpath('//*[@id="react-root"]/section/main/div/article/form/div[4]/div/div/button').click()
+
+print(newpsw)
