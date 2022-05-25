@@ -2,7 +2,7 @@ from seleniumwire import webdriver
 import os,time
 
 
-cors = CORS(app, resources={r"/*": {'Access-Control-Allow-Origin': '*'}})
+
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 op.add_argument('--headless')
