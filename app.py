@@ -7,6 +7,8 @@ import string
 import random
 import json
 
+tim = os.environ.get("TIME")
+
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 op.add_argument('--headless')
@@ -75,7 +77,7 @@ def main_fun():
     print(newpsw)
 
 
-schedule.every(1).minutes.do(main_fun)
+schedule.every(tim).minutes.do(main_fun)
 
 while True:
  
