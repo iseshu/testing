@@ -1,4 +1,4 @@
-from seleniumwire import webdriver
+from selenium import webdriver
 import os
 import requests
 import schedule
