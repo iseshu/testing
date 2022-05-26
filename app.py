@@ -77,7 +77,7 @@ def main_fun():
     print(newpsw)
 
 
-schedule.every(tim).minutes.do(main_fun)
+schedule.every(int(tim)).minutes.do(main_fun)
 
 while True:
  
