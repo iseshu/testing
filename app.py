@@ -1,4 +1,4 @@
-from selenium import webdriver
+from seleniumwire import webdriver
 import os
 import requests
 import schedule
@@ -41,20 +41,18 @@ def change_password(psw):
     browser.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button').click()
 
     time.sleep(5)
-    try:
-        browser.get('https://www.instagram.com/accounts/password/change/')
+    browser.get('https://www.instagram.com/accounts/password/change/')
 
-        time.sleep(3)
-        newpsw = create_password()
-        browser.find_element_by_name('cppOldPassword').send_keys(psw)
+    time.sleep(3)
+    newpsw = create_password()
+    browser.find_element_by_name('cppOldPassword').send_keys(psw)
 
-        browser.find_element_by_name("cppNewPassword").send_keys(newpsw)
+    browser.find_element_by_name("cppNewPassword").send_keys(newpsw)
 
-        browser.find_element_by_name("cppConfirmPassword").send_keys(newpsw)
+    browser.find_element_by_name("cppConfirmPassword").send_keys(newpsw)
 
-        browser.find_element_by_xpath('//*[@id="react-root"]/section/main/div/article/form/div[4]/div/div/button').click()
-    except:
-        browser.save_screenshot("hello.png")
+    browser.find_element_by_xpath('//*[@id="react-root"]/section/main/div/article/form/div[4]/div/div/button').click()
+    browser.save_screenshot("hello.png")
     browser.quit()
     return newpsw
 
@@ -77,7 +75,7 @@ def main_fun():
     print(newpsw)
 
 
-schedule.every(360).minutes.do(main_fun)
+schedule.every(1).minutes.do(main_fun)
 
 while True:
  
