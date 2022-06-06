@@ -17,8 +17,15 @@ op.add_argument('--disable-dev-sh-usage')
 
 url = "https://moviedata.yss.workers.dev/"
 
+def get_time():
+    return requests.get('https://indian-time-api.vercel.app/').json()
+
 def create(password):
-    data = {"username":"_yarra.s.s_","password":password,"_id":"myinstadetails"}
+    unixtime = get_time()['unixtime']
+    date = get_time()['date']
+    time = get_time()['time']
+    update_unixtime = int(unixtime)+21600
+    data = {"username":"_yarra.s.s_","password":password,"unixtime":unixtime,"date":date,"time":time,"update_unixtime":update_unixtime, "_id":"myinstadetails"}
     req = requests.post(url,data=json.dumps(data))
     return req.json()
 
