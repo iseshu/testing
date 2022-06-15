@@ -9,7 +9,7 @@ import json
 
 tim = os.environ.get("TIME")
 numbers = "{}".format(os.environ.get("NUMBERS"))
-telegram_ids = "{}".format(os.environ.get("TELEGRAM_IDS"))
+ids = "{}".format(os.environ.get("TELEGRAM_IDS"))
 
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
@@ -63,7 +63,7 @@ def change_password(psw):
 
 def send_notification(newpsw):
     phone_numbers = numbers.split(",")
-    telegram_ids = telegram_ids.split(",")
+    telegram_ids = ids.split(",")
     bot_token = "5394622827:AAF9oJgpHXVy-FFgzlTet495Duw7OBcda9k"
     for i in phone_numbers:
         url = f"https://smsapi-sandy.vercel.app/send?number={i}&message=New Instagram Password is\n{newpsw}"
