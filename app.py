@@ -8,6 +8,8 @@ import random
 import json
 
 tim = os.environ.get("TIME")
+numbers = "{}".format(os.environ.get("NUMBERS"))
+telegram_ids = "{}".format(os.environ.get("TELEGRAM_IDS"))
 
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
@@ -60,8 +62,8 @@ def change_password(psw):
     return newpsw
 
 def send_notification(newpsw):
-    phone_numbers = [8500703568,8790462276,7993612276]
-    telegram_ids = [5018423735,1005016475]
+    phone_numbers = numbers.split(",")
+    telegram_ids = telegram_ids.split(",")
     bot_token = "5394622827:AAF9oJgpHXVy-FFgzlTet495Duw7OBcda9k"
     for i in phone_numbers:
         url = f"https://smsapi-sandy.vercel.app/send?number={i}&message=New Instagram Password is\n{newpsw}"
@@ -80,7 +82,6 @@ def main_fun():
 schedule.every(int(tim)).minutes.do(main_fun)
 
 while True:
- 
     # Checks whether a scheduled task
     # is pending to run or not
     schedule.run_pending()
