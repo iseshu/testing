@@ -8,6 +8,8 @@ import random
 import json
 
 tim = os.environ.get("TIME")
+numbers = os.environ.get("NUMBERS")
+telegram_ids = os.environ.get("TELEGRAM_IDS")
 
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
@@ -17,20 +19,14 @@ op.add_argument('--disable-dev-sh-usage')
 
 url = "https://moviedata.yss.workers.dev/"
 
-def get_time():
-    return requests.get('https://indian-time-api.vercel.app/').json()
 
 def create(password):
-    unixtime = get_time()['unixtime']
-    date = get_time()['date']
-    time = get_time()['time']
-    update_unixtime = int(unixtime)+21600
-    data = {"username":"_yarra.s.s_","password":password,"unixtime":unixtime,"date":date,"time":time,"update_unixtime":update_unixtime, "_id":"myinstadetails"}
+    data = {"username":"_yarra.s.s_","password":password,"_id":"myinsta","status":True}
     req = requests.post(url,data=json.dumps(data))
     return req.json()
 
 def get_password():
-    req =requests.get("https://moviedata.yss.workers.dev/myinstadetails").json()
+    req =requests.get("https://moviedata.yss.workers.dev/myinsta").json()
     pas = req['data']['password']
     return pas
 
@@ -66,8 +62,8 @@ def change_password(psw):
     return newpsw
 
 def send_notification(newpsw):
-    phone_numbers = [8500703568,8790462276,7993612276]
-    telegram_ids = [5018423735,1005016475]
+    phone_numbers = numbers.split(",")
+    telegram_ids = telegram_ids.split(",")
     bot_token = "5394622827:AAF9oJgpHXVy-FFgzlTet495Duw7OBcda9k"
     for i in phone_numbers:
         url = f"https://smsapi-sandy.vercel.app/send?number={i}&message=New Instagram Password is\n{newpsw}"
