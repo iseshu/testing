@@ -8,8 +8,8 @@ import random
 import json
 
 tim = os.environ.get("TIME")
-numbers = os.environ.get("NUMBERS")
-telegram_ids = os.environ.get("TELEGRAM_IDS")
+numbers = "{}".format(os.environ.get("NUMBERS"))
+telegram_ids = "{}".format(os.environ.get("TELEGRAM_IDS"))
 
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
@@ -78,7 +78,6 @@ def main_fun():
     send_notification(newpsw)
     create(newpsw)
     print(newpsw)
-
 
 if __name__ == "__main__":
     main_fun()
