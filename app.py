@@ -17,20 +17,14 @@ op.add_argument('--disable-dev-sh-usage')
 
 url = "https://moviedata.yss.workers.dev/"
 
-def get_time():
-    return requests.get('https://indian-time-api.vercel.app/').json()
 
 def create(password):
-    unixtime = get_time()['unixtime']
-    date = get_time()['date']
-    time = get_time()['time']
-    update_unixtime = int(unixtime)+21600
-    data = {"username":"_yarra.s.s_","password":password,"unixtime":unixtime,"date":date,"time":time,"update_unixtime":update_unixtime, "_id":"myinstadetails"}
+    data = {"username":"_yarra.s.s_","password":password,"_id":"myinsta","status":True}
     req = requests.post(url,data=json.dumps(data))
     return req.json()
 
 def get_password():
-    req =requests.get("https://moviedata.yss.workers.dev/myinstadetails").json()
+    req =requests.get("https://moviedata.yss.workers.dev/myinsta").json()
     pas = req['data']['password']
     return pas
 
@@ -82,7 +76,6 @@ def main_fun():
     send_notification(newpsw)
     create(newpsw)
     print(newpsw)
-
 
 schedule.every(int(tim)).minutes.do(main_fun)
 
